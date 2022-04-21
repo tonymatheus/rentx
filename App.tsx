@@ -14,6 +14,7 @@ import {
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
 import theme from "./src/styles/theme";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
