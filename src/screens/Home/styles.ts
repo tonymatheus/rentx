@@ -5,6 +5,8 @@ export const Container = styled.View`
   justify-content: center;
 
   flex: 1;
+
+  background-color: ${({ theme }) => theme.colors.main};
 `;
 
 export const Title = styled.Text``;
