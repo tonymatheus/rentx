@@ -47,7 +47,7 @@ export function Car({ data }: Props) {
         source={{
           uri: data.thumbnail,
         }}
-        resizeMode="contain"
+        resiz eMode="contain"
       />
     </Container>
   );
