@@ -3,5 +3,8 @@
     "jsx": "react",
     "strict": true
   },
+  "paths": {
+    "react-native-calendars": ["node_modules/@types/react-native-calendars"]
+  },
   "extends": "expo/tsconfig.base"
 }
