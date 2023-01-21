@@ -57,7 +57,7 @@ export const Scheduling = () => {
 
   const theme = useTheme();
   const route = useRoute();
-  const { car } = route.params;
+  const { car } = route.params as Params;
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handleSchedulingDetails = () => {
