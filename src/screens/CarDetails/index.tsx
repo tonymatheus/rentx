@@ -33,20 +33,26 @@ import {
 } from "@react-navigation/native";
 import { CarDTO } from "../../dtos/CarDTO";
 
-type RouteProps = {
-  car: CarDTO;
-};
+// type RouteProps = {
+//   car: CarDTO;
+// };
 
-interface ParamList extends RouteProp<any, any> {
-  params: RouteProps;
+// interface ParamList extends RouteProp<any, any> {
+//   params: RouteProps;
+// }
+
+interface Params {
+  car: CarDTO;
 }
 
 export function CarDetails() {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const { params } = useRoute<ParamList>();
+  // const { params } = useRoute<ParamList>();
+  const route = useRoute();
+  const { car } = route.params;
 
   function handleConfirmRental() {
-    navigation.navigate("Scheduling");
+    navigation.navigate("Scheduling", { car });
   }
   return (
     <Container>
@@ -54,22 +60,22 @@ export function CarDetails() {
         <BackButton onPress={() => navigation.goBack()} />
       </Header>
       <CarImages>
-        <ImageSlider imagesUrl={params.car.photos} />
+        <ImageSlider imagesUrl={car.photos} />
       </CarImages>
       <Content>
         <Details>
           <Description>
-            <Brand>{params.car.brand}</Brand>
-            <Name>{params.car.name}</Name>
+            <Brand>{car.brand}</Brand>
+            <Name>{car.name}</Name>
           </Description>
 
           <Rent>
-            <Period>{params.car.rent.period}</Period>
-            <Price>$S{params.car.rent.price}</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>$S{car.rent.price}</Price>
           </Rent>
         </Details>
         <Accessories>
-          {params.car.accessories.map((accessory) => (
+          {car.accessories.map((accessory) => (
             <Accessory
               key={accessory.type}
               name={accessory.name}
@@ -77,7 +83,7 @@ export function CarDetails() {
             />
           ))}
         </Accessories>
-        <About>{params.car.about}</About>
+        <About>{car.about}</About>
       </Content>
       <Footer>
         <Button
