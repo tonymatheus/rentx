@@ -1,7 +1,7 @@
 import React from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Feather } from "@expo/vector-icons";
-import { Acessory } from "../../components/Acessory";
+import { Accessory } from "../../components/Acessory";
 
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlader";
@@ -81,17 +81,17 @@ export function SchedulingDetails() {
           </Rent>
         </Details>
         <Acessories>
-          <Acessory name="380km/h" icon={SpeedSvg} />
-          <Acessory name="3.2" icon={AccelerationSvg} />
-          <Acessory name="800 HP" icon={ForceSvg} />
-          <Acessory name="Gasoline" icon={GasolineSvg} />
-          <Acessory name="Auto" icon={ExchangeSvg} />
-          <Acessory name="2 pessoas" icon={PeopleSvg} />
+          <Accessory name='380km/h' icon={SpeedSvg} />
+          <Accessory name='3.2' icon={AccelerationSvg} />
+          <Accessory name='800 HP' icon={ForceSvg} />
+          <Accessory name='Gasoline' icon={GasolineSvg} />
+          <Accessory name='Auto' icon={ExchangeSvg} />
+          <Accessory name='2 pessoas' icon={PeopleSvg} />
         </Acessories>
         <RentalPeriod>
           <CalendarIcon>
             <Feather
-              name="calendar"
+              name='calendar'
               size={RFValue(25)}
               color={theme.colors.shape}
             />
@@ -101,7 +101,7 @@ export function SchedulingDetails() {
             <DateValue>18/06/1991</DateValue>
           </DateInfo>
           <Feather
-            name="chevron-right"
+            name='chevron-right'
             size={RFValue(10)}
             color={theme.colors.text}
           />
@@ -110,7 +110,7 @@ export function SchedulingDetails() {
             <DateValue>18/06/1991</DateValue>
           </DateInfo>
           <Feather
-            name="chevron-left"
+            name='chevron-left'
             size={RFValue(10)}
             color={theme.colors.text}
           />
@@ -125,7 +125,7 @@ export function SchedulingDetails() {
       </Content>
       <Footer>
         <Button
-          title="Alugar agora"
+          title='Alugar agora'
           onPress={handleConfirmScheduling}
           color={theme.colors.success}
         />
