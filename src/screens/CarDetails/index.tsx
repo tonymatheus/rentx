@@ -49,7 +49,7 @@ export function CarDetails() {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   // const { params } = useRoute<ParamList>();
   const route = useRoute();
-  const { car } = route.params;
+  const { car } = route.params as Params;
 
   function handleConfirmRental() {
     navigation.navigate("Scheduling", { car });
