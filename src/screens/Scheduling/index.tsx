@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { BackButton } from "../../components/BackButton";
 import ArrowSVG from "../../assets/arrow.svg";
+import { getPlatformDate } from "../../utils/getPlatformDate";
+import { CarDTO } from "../../dtos/CarDTO";
+
 import {
   Container,
   Header,
@@ -13,23 +16,34 @@ import {
   Footer,
 } from "./styles";
 import { useTheme } from "styled-components";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { Button } from "../../components/Button";
 import {
   Calendar,
   DayProps,
   MarkedDateProps,
-  generateinterval,
+  generateInterval,
 } from "../../components/Calendar";
 import {
   NavigationProp,
   ParamListBase,
   useNavigation,
+  useRoute,
 } from "@react-navigation/native";
+import { format } from "date-fns";
+
+interface RentalPeriod {
+  start: number;
+  startFormatted: string;
+  end: number;
+  endFormatted: string;
+}
+
+interface Params {
+  car: CarDTO;
+}
 
 export const Scheduling = () => {
-  const theme = useTheme();
-  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
     {} as DayProps
   );
@@ -37,8 +51,24 @@ export const Scheduling = () => {
     {} as MarkedDateProps
   );
 
-  const handleShcedulingDetails = () => {
-    navigation.navigate("SchedulingDetails");
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
+    {} as RentalPeriod
+  );
+
+  const theme = useTheme();
+  const route = useRoute();
+  const { car } = route.params;
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
+  const handleSchedulingDetails = () => {
+    if (!rentalPeriod.start || !rentalPeriod.end) {
+      Alert.alert("Selecione o intervalo de data para alugar");
+    } else {
+      navigation.navigate("SchedulingDetails", {
+        car,
+        dates: Object.keys(markedDates),
+      });
+    }
   };
 
   const handleChangeDate = (date: DayProps) => {
@@ -52,8 +82,20 @@ export const Scheduling = () => {
 
     setLastSelectedDate(end);
 
-    const interval = generateinterval(start, end);
+    const interval = generateInterval(start, end);
     setMarkedDates(interval);
+
+    const firstDate = Object.keys(interval)[0];
+    const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
+    setRentalPeriod({
+      start: start.timestamp,
+      end: end.timestamp,
+      startFormatted: format(
+        getPlatformDate(new Date(firstDate)),
+        "dd/MM/yyyy"
+      ),
+      endFormatted: format(getPlatformDate(new Date(endDate)), "dd/MM/yyyy"),
+    });
     console.log(interval);
   };
 
@@ -75,12 +117,16 @@ export const Scheduling = () => {
         <RentalPeriod>
           <DateInfo>
             <DateTitle>DE</DateTitle>
-            <DateValue selected={false}>18/06/2022</DateValue>
+            <DateValue selected={!!rentalPeriod.startFormatted}>
+              {rentalPeriod.startFormatted}
+            </DateValue>
           </DateInfo>
           <ArrowSVG />
           <DateInfo>
             <DateTitle>ATÉ</DateTitle>
-            <DateValue selected={false}>18/06/2022</DateValue>
+            <DateValue selected={!!rentalPeriod.endFormatted}>
+              {rentalPeriod.endFormatted}
+            </DateValue>
           </DateInfo>
         </RentalPeriod>
       </Header>
@@ -88,7 +134,7 @@ export const Scheduling = () => {
         <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
       <Footer>
-        <Button title='Confirmar' onPress={handleShcedulingDetails} />
+        <Button title='Confirmar' onPress={handleSchedulingDetails} />
       </Footer>
     </Container>
   );
