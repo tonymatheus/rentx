@@ -58,7 +58,8 @@ export function Home() {
       <StatusBar
         barStyle='light-content'
         backgroundColor='transparent'
-        translucent={true}
+        hidden
+        translucent={false}
       />
 
       <Header>
