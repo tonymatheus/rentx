@@ -50,7 +50,6 @@ export const Scheduling = () => {
   const [markedDates, setMarkedDates] = useState<MarkedDateProps>(
     {} as MarkedDateProps
   );
-
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
     {} as RentalPeriod
   );
@@ -58,17 +57,14 @@ export const Scheduling = () => {
   const theme = useTheme();
   const route = useRoute();
   const { car } = route.params as Params;
+ 
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handleSchedulingDetails = () => {
-    if (!rentalPeriod.start || !rentalPeriod.end) {
-      Alert.alert("Selecione o intervalo de data para alugar");
-    } else {
-      navigation.navigate("SchedulingDetails", {
-        car,
-        dates: Object.keys(markedDates),
-      });
-    }
+    navigation.navigate("SchedulingDetails", {
+      car,
+      dates: Object.keys(markedDates),
+    });
   };
 
   const handleChangeDate = (date: DayProps) => {
@@ -134,7 +130,11 @@ export const Scheduling = () => {
         <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
       <Footer>
-        <Button title='Confirmar' onPress={handleSchedulingDetails} />
+        <Button
+          title='Confirmar'
+          onPress={handleSchedulingDetails}
+        
+        />
       </Footer>
     </Container>
   );
