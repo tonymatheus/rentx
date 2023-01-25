@@ -66,7 +66,7 @@ export const CarWrapper = styled.View`
 export const CarFooter = styled.View`
   width: 100%;
   flex-direction: row;
-  margin-top: -10;
+  margin-top: -10px;
   align-items: center;
   justify-content: space-between;
   padding: 12px;
@@ -81,7 +81,7 @@ export const CarFooterPeriod = styled.View`
   flex-direction: row;
 `;
 export const CarFooterDate = styled.Text`
-color: ${({ theme }) => theme.colors.title};
+  color: ${({ theme }) => theme.colors.title};
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   font-size: ${RFValue(13)}px;
 `;
