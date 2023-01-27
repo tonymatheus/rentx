@@ -26,6 +26,7 @@ import { BackButton } from "../../components/BackButton";
 import { FlatList, StatusBar } from "react-native";
 import { Car } from "../../components/Car";
 import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 interface CarProps {
   car: CarDTO;
@@ -78,7 +79,7 @@ export function MyCars() {
         <Subtitle>Conforto, segurança praticidade</Subtitle>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <Content>
           <Appointments>
@@ -87,7 +88,7 @@ export function MyCars() {
           </Appointments>
           <FlatList
             data={cars}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => String(item.id)}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <CarWrapper>
