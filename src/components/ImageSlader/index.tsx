@@ -36,7 +36,7 @@ export const ImageSlider = ({ imagesUrl }: Props) => {
       </ImageIndexes>
       <FlatList
         data={imagesUrl}
-        keyExtractor={(key) => key}
+        keyExtractor={(key) => String(key)}
         renderItem={({ item }) => (
           <CarImageWrapper>
             <CarImage source={{ uri: item }} />
