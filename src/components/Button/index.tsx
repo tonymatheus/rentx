@@ -3,12 +3,11 @@ import { useTheme } from "styled-components";
 
 import { Container, Title } from "./styles";
 import { ActivityIndicator } from "react-native";
+import { RectButtonProps } from "react-native-gesture-handler";
 
-interface Props {
+interface Props extends RectButtonProps {
   color?: string;
   title: string;
-  onPress: () => void;
-  enabled?: boolean;
   loading?: boolean;
   light?: boolean;
 }
