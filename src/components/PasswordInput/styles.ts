@@ -10,6 +10,7 @@ export const Container = styled.View`
 
   border-bottom-with: 2px;
   border-bottom-color: transparent;
+  margin-bottom: 8px;
 `;
 
 export const IconContainer = styled.View<Props>`
@@ -41,5 +42,5 @@ export const InputText = styled(TextInput)<Props>`
     css`
       border-bottom-width: 2px;
       border-bottom-color: ${({ theme }) => theme.colors.main};
-    `}
+    `};
 `;
