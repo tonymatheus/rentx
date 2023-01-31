@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -6,6 +7,8 @@ import {
   Alert,
 } from "react-native";
 import { useTheme } from "styled-components/native";
+
+import { Confirmation } from "../../Confirmation";
 
 import {
   Container,
@@ -16,6 +19,7 @@ import {
   Title,
   SubTitle,
 } from "./styles";
+
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -53,6 +57,11 @@ export const SignUpSecondStep = () => {
       return Alert.alert("Senhas diferentes, digite senhas iguais!!");
     }
     //enviar para  Api e  cadastrar e enviar para tela de cadastro
+    navigation.navigate("Confirmation", {
+      nextScreenRoute: "SignIn",
+      title: "Conta criada",
+      message: `Agora é só fazer login\ne aproveitar `,
+    });
   };
 
   return (
