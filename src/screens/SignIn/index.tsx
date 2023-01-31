@@ -16,11 +16,13 @@ import { Container, Header, SubTitle, Title, Footer, Form } from "./styles";
 
 import { useTheme } from "styled-components/native";
 import { PasswordInput } from "../../components/PasswordInput";
+import { useNavigation } from "@react-navigation/native";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigation = useNavigation();
   const theme = useTheme();
 
   const handleSignIn = async () => {
@@ -48,6 +50,10 @@ export function SignIn() {
       }
     }
   };
+
+  const handleNewAccount = ()=>{
+    navigation.navigate('SignUpFirstStep')
+  }
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -94,8 +100,8 @@ export function SignIn() {
             <Button
               title='Criar conta gratuita'
               color={theme.colors.background_secondary}
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleNewAccount}
+              enabled={true}
               loading={false}
               light
             />
