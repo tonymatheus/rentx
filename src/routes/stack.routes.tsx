@@ -5,7 +5,7 @@ import { Home } from "../screens/Home";
 import { CarDetails } from "../screens/CarDetails";
 import { Scheduling } from "../screens/Scheduling";
 import { SchedulingDetails } from "../screens/SchedulingDetails";
-import { SchedulingComplete } from "../screens/SchedulingComplete";
+import { Confirmation } from "../screens/Confirmation";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
 import { SignIn } from "../screens/SignIn";
@@ -20,11 +20,11 @@ export function StackRoutes() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName='SignUpFirstStep'
+      initialRouteName='SignIn'
     >
       <Stack.Screen name='SignIn' component={SignIn} />
       <Stack.Screen name='SignUpFirstStep' component={SignUpFirstStep} />
-      <Stack.Screen name='SignUpSecondStep'  component={SignUpSecondStep}/>
+      <Stack.Screen name='SignUpSecondStep' component={SignUpSecondStep} />
       <Stack.Screen
         name='Home'
         component={Home}
@@ -35,7 +35,7 @@ export function StackRoutes() {
       <Stack.Screen name='CarDetails' component={CarDetails} />
       <Stack.Screen name='Scheduling' component={Scheduling} />
       <Stack.Screen name='SchedulingDetails' component={SchedulingDetails} />
-      <Stack.Screen name='SchedulingComplete' component={SchedulingComplete} />
+      <Stack.Screen name='Confirmation' component={Confirmation} />
       <Stack.Screen name='MyCars' component={MyCars} />
     </Stack.Navigator>
   );
