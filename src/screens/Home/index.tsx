@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  BackHandler,
-  View,
-} from "react-native";
+import { StatusBar, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { PanGestureHandler } from "react-native-gesture-handler";
@@ -89,12 +83,6 @@ export function Home() {
     console.log(cars);
     fetchCars();
   }, []);
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  });
 
   return (
     <Container>
