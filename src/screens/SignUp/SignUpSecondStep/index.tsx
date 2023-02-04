@@ -26,12 +26,13 @@ import { Bullet } from "../../../components/Bullet";
 import { Input } from "../../../components/Input";
 import { Button } from "../../../components/Button";
 import { PasswordInput } from "../../../components/PasswordInput";
+import { api } from "../../../services/api";
 
 interface Params {
   user: {
     name: string;
     email: string;
-    driveLicence: string;
+    driverLicense: string;
   };
 }
 export const SignUpSecondStep = () => {
@@ -49,7 +50,7 @@ export const SignUpSecondStep = () => {
     navigation.goBack();
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!password || !passwordConfirm) {
       return Alert.alert("Informe senha e a confirmação dela!");
     }
@@ -57,11 +58,25 @@ export const SignUpSecondStep = () => {
       return Alert.alert("Senhas diferentes, digite senhas iguais!!");
     }
     //enviar para  Api e  cadastrar e enviar para tela de cadastro
-    navigation.navigate("Confirmation", {
-      nextScreenRoute: "SignIn",
-      title: "Conta criada",
-      message: `Agora é só fazer login\ne aproveitar `,
-    });
+
+    await api
+      .post("/users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
+      })
+      .then(() => {
+        navigation.navigate("Confirmation", {
+          nextScreenRoute: "SignIn",
+          title: "Conta criada",
+          message: `Agora é só fazer login\ne aproveitar `,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        return Alert.alert("Opa", "não foi possível cadastrar");
+      });
   };
 
   return (
@@ -88,12 +103,14 @@ export const SignUpSecondStep = () => {
               placeholder='senha'
               value={password}
               onChangeText={setPassword}
+              autoCapitalize='none'
             />
             <PasswordInput
               iconName='lock'
               placeholder='repetir senha'
               value={passwordConfirm}
               onChangeText={setPasswordConfirm}
+              autoCapitalize='none'
             />
             <Button
               title='Cadastrar'
