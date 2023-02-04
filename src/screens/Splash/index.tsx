@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import BrandSVG from "../../assets/brand.svg";
 import LogoSVG from "../../assets/logo.svg";
 
-import { Button, Text, StyleSheet, Dimensions } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -53,7 +52,7 @@ export function Splash() {
   });
 
   const startApp = () => {
-    navigation.navigate("Home");
+    navigation.navigate("SignIn");
   };
 
   useEffect(() => {
