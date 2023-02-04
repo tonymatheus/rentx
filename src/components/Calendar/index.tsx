@@ -34,8 +34,6 @@ interface CalendarProps {
   onDayPress: DateCallbackHandler;
 }
 
-import { Container } from "./styles";
-
 function Calendar({ markedDates, onDayPress }: CalendarProps) {
   const theme = useTheme();
   return (
