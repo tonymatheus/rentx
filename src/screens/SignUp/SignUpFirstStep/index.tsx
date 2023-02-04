@@ -26,7 +26,7 @@ import { Button } from "../../../components/Button";
 export const SignUpFirstStep = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [driveLicense, setDriveLicense] = useState("");
+  const [driverLicense, setDriverLicense] = useState("");
 
   const navigation = useNavigation();
 
@@ -34,35 +34,27 @@ export const SignUpFirstStep = () => {
     navigation.goBack();
   };
 
-  const handleValidation = async () => {
-    const scheme = Yup.object().shape({
-      name: Yup.string().required("nome [e obrigatório"),
-      email: Yup.string().required("email é obrigatório"),
-      driveLicense: Yup.string().required("CNH é obrigatória"),
-    });
-    await scheme.validate(name, email, driveLicense);
-  };
-
-  const handleNextStep = async () => {
+  async function handleNextStep() {
     try {
-      const scheme = Yup.object().shape({
-        driveLicense: Yup.string().required("CNH é obrigatório"),
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required("CNH é obrigatória"),
         email: Yup.string()
-          .required("email é obrigatório")
-          .email("digite um email válido"),
-        name: Yup.string().required("Nome é obrigatório"),
+          .email("E-mail inválido!")
+          .required("E-mail é obrigatório"),
+        name: Yup.string().required("Nome é obrigatório!"),
       });
 
-      const data = { name, email, driveLicense };
+      const data = { name, email, driverLicense };
+      await schema.validate(data);
 
-      await scheme.validate(data);
       navigation.navigate("SignUpSecondStep", { user: data });
     } catch (error) {
+      console.log(error);
       if (error instanceof Yup.ValidationError) {
-        return Alert.alert("opa!", error.message);
+        Alert.alert("Atenção!", error.message);
       }
     }
-  };
+  }
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -88,6 +80,7 @@ export const SignUpFirstStep = () => {
               placeholder='Nome'
               value={name}
               onChangeText={setName}
+              autoCapitalize='none'
             />
             <Input
               iconName='mail'
@@ -95,13 +88,14 @@ export const SignUpFirstStep = () => {
               keyboardType='email-address'
               value={email}
               onChangeText={setEmail}
+              autoCapitalize='none'
             />
             <Input
               iconName='credit-card'
               placeholder='CNH'
               keyboardType='numeric'
-              value={driveLicense}
-              onChangeText={setDriveLicense}
+              value={driverLicense}
+              onChangeText={setDriverLicense}
             />
           </Form>
           <Button title='proximo' onPress={handleNextStep} />
