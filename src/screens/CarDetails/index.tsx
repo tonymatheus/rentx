@@ -129,8 +129,8 @@ export function CarDetails() {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>$S{car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>$S{car.price}</Price>
           </Rent>
         </Details>
         <Accessories>
@@ -142,10 +142,7 @@ export function CarDetails() {
             />
           ))}
         </Accessories>
-        <About>
-          {car.about}
-          
-        </About>
+        <About>{car.about}</About>
       </Animated.ScrollView>
       <Footer>
         <Button
