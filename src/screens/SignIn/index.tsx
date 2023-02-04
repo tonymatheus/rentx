@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import * as Yup from "yup";
+import { useAuth } from "../../hooks/auth";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -23,6 +24,7 @@ export function SignIn() {
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+  const { signIn } = useAuth();
   const theme = useTheme();
 
   const handleSignIn = async () => {
@@ -39,6 +41,8 @@ export function SignIn() {
       });
 
       //Fazer login
+      signIn({ email, password });
+      Alert.alert("Logou");
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("opa", error.message);
@@ -51,9 +55,9 @@ export function SignIn() {
     }
   };
 
-  const handleNewAccount = ()=>{
-    navigation.navigate('SignUpFirstStep')
-  }
+  const handleNewAccount = () => {
+    navigation.navigate("SignUpFirstStep");
+  };
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
